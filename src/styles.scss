@@ -1,3 +1,27 @@
+// @import '~aos/dist/aos.css';
+// @import '~swiper/swiper-bundle.css';
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #55A0A4, #A03A88);
+  color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+.container {
+  // max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
 // Color Palette
 :root {
   // Primary Colors - Professional Teal
