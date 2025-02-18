@@ -1,0 +1,147 @@
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+      <div class="hero-content" data-aos="fade-up">
+        <h1>Let's Connect!</h1>
+        <p>We'd love to hear from you. Drop us a line and we'll get back to you as soon as possible.</p>
+      </div>
+    </div>
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+  </section>
+  
+  <!-- Main Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Contact Form -->
+        <div class="form-wrapper" data-aos="fade-right">
+          <h2>Send us a Message</h2>
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+            <div class="form-group">
+              <div class="input-wrapper">
+                <input type="text" formControlName="name" id="name" placeholder="Your Name" required>
+                <span class="focus-border"></span>
+              </div>
+              <div class="error-message" *ngIf="submitted && contactForm.get('name')?.errors">
+                Please enter your name
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <div class="input-wrapper">
+                <input type="email" formControlName="email" id="email" placeholder="Your Email" required>
+                <span class="focus-border"></span>
+              </div>
+              <div class="error-message" *ngIf="submitted && contactForm.get('email')?.errors">
+                Please enter a valid email
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <div class="input-wrapper">
+                <input type="text" formControlName="subject" id="subject" placeholder="Subject" required>
+                <span class="focus-border"></span>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <div class="input-wrapper">
+                <textarea formControlName="message" id="message" rows="5" placeholder="Your Message" required></textarea>
+                <span class="focus-border"></span>
+              </div>
+            </div>
+  
+            <button type="submit" class="submit-button">
+              Send Message
+              <i class="fas fa-paper-plane"></i>
+            </button>
+  
+            <div class="submit-status" *ngIf="submitStatus">
+              <div class="status-message" [class]="submitStatus">
+                <i class="fas" [class.fa-check-circle]="submitStatus === 'success'"
+                   [class.fa-exclamation-circle]="submitStatus === 'error'"></i>
+                {{submitStatus === 'success' ? 'Message sent successfully!' : 'Please check your inputs'}}
+              </div>
+            </div>
+          </form>
+        </div>
+  
+        <!-- Contact Information -->
+        <div class="info-wrapper" data-aos="fade-left">
+          <div class="contact-info">
+            <h2>Get in Touch</h2>
+            
+            <div class="info-item">
+              <div class="icon-wrapper">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="info-content">
+                <h3>Email Us</h3>
+                <a [href]="'mailto:' + contactInfo.email">{{contactInfo.email}}</a>
+              </div>
+            </div>
+  
+            <div class="info-item">
+              <div class="icon-wrapper">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div class="info-content">
+                <h3>Call Us</h3>
+                <a [href]="'tel:' + contactInfo.phone">{{contactInfo.phone}}</a>
+              </div>
+            </div>
+  
+            <div class="info-item">
+              <div class="icon-wrapper">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="info-content">
+                <h3>Visit Us</h3>
+                <p>{{contactInfo.address}}</p>
+              </div>
+            </div>
+  
+            <!-- Social Media Links -->
+            <div class="social-links">
+              <h3>Follow Us</h3>
+              <div class="social-icons">
+                <a *ngFor="let social of socialLinks" 
+                   [href]="social.url" 
+                   target="_blank"
+                   class="social-icon">
+                  <i [class]="social.icon"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Map -->
+          <div class="map-wrapper" data-aos="zoom-in">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=your-map-embed-url"
+              width="100%"
+              height="300"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FAQ CTA -->
+  <section class="faq-cta">
+    <div class="container">
+      <div class="cta-content" data-aos="fade-up">
+        <h2>Still Have Questions?</h2>
+        <p>Check out our frequently asked questions or reach out to our support team.</p>
+        <button class="cta-button">View FAQs</button>
+      </div>
+    </div>
+  </section>
