@@ -2,11 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import AOS from 'aos';
+import { CountUpModule } from 'ngx-countup';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, CountUpModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -71,6 +72,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     },
   ];
 
+  statistics = [
+    { value: 2000, suffix: '+', label: 'Current Clients', delay: 0 },
+    { value: this.calculateYearsOfExperience(), suffix: '+', label: 'Years Of Experience', delay: 100 },
+    { value: 2, suffix: '+', label: 'Workshops', delay: 200 },
+    { value: 10, suffix: '+', label: 'Recognitions', delay: 300 },
+    { value: 3500, suffix: '+', label: 'Signs Executed', delay: 400 }
+  ];
+
   ngOnInit() {
     AOS.init({
       duration: 1000,
@@ -120,5 +129,11 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       });
     });
+  }
+
+  private calculateYearsOfExperience(): number {
+    const startYear = 2012;
+    const currentYear = new Date().getFullYear();
+    return currentYear - startYear;
   }
 } 

@@ -58,6 +58,18 @@
   </div>
 </section>
 
+<section class="statistics" aos="fade-up">
+  <div class="stats-container">
+    <div class="stat-box" *ngFor="let stat of statistics" aos="zoom-in" [attr.data-aos-delay]="stat.delay">
+      <div class="stat-value">
+        <span [countUp]="stat.value" >0</span>
+        <span class="suffix">{{stat.suffix}}</span>
+      </div>
+      <div class="stat-label">{{stat.label}}</div>
+    </div>
+  </div>
+</section>
+
 <div class="landing-container" aos="fade-up">
     <header class="header">
       <h1>Welcome to Our Sign Board Business</h1>

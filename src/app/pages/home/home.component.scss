@@ -636,3 +636,87 @@
     }
   }
 }
+
+.statistics {
+  padding: 4rem 0;
+  background: linear-gradient(to right, rgba(255,255,255,0.97), rgba(255,255,255,0.97)),
+              url('../../../assets/patterns/geometric-pattern.svg') center/200px;
+  
+  .stats-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+    padding: 0 2rem;
+
+    .stat-box {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-radius: var(--radius-lg);
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+
+      .stat-value {
+        font-size: 3.2rem;
+        font-weight: var(--font-bold);
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+        font-family: var(--font-secondary);
+        
+        .suffix {
+          font-size: 2.5rem;
+          color: var(--secondary);
+        }
+      }
+
+      .stat-label {
+        font-size: 1.1rem;
+        color: var(--neutral-medium);
+        font-weight: var(--font-medium);
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .stats-container {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 3rem 0;
+    
+    .stats-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      
+      .stat-box {
+        padding: 1.5rem 1rem;
+        
+        .stat-value {
+          font-size: 2.8rem;
+          
+          .suffix {
+            font-size: 2.2rem;
+          }
+        }
+        
+        .stat-label {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats-container {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+}
