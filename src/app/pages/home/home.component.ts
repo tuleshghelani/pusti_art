@@ -80,6 +80,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       offset: 50
     });
     this.startSlideShow();
+    this.initParallaxEffect();
   }
 
   ngOnDestroy() {
@@ -104,5 +105,20 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   goToSlide(index: number) {
     this.currentSlide = index;
+  }
+
+  private initParallaxEffect() {
+    window.addEventListener('scroll', () => {
+      const images = document.querySelectorAll('.parallax-img');
+      images.forEach((img: Element) => {
+        const speed = (img as HTMLElement).classList.contains('offset') ? 0.15 : 0.1;
+        const rect = (img as HTMLElement).getBoundingClientRect();
+        const scrolled = window.pageYOffset;
+        
+        if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+          (img as HTMLElement).style.transform = `translateY(${scrolled * speed}px)`;
+        }
+      });
+    });
   }
 } 
