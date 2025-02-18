@@ -1,0 +1,38 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="geometric" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+      <!-- Hexagonal grid pattern -->
+      <path d="M25,0 L50,12.5 L50,37.5 L25,50 L0,37.5 L0,12.5 Z" 
+            fill="none" 
+            stroke="#55A0A4" 
+            stroke-width="0.5" 
+            opacity="0.15"/>
+      
+      <!-- Accent circles -->
+      <circle cx="25" cy="25" r="8" 
+              fill="none" 
+              stroke="#A03A88" 
+              stroke-width="0.5" 
+              opacity="0.12"/>
+      
+      <!-- Decorative dots -->
+      <circle cx="25" cy="25" r="2" 
+              fill="#FFB649" 
+              opacity="0.2"/>
+      
+      <!-- Corner accents -->
+      <path d="M0,0 L10,10 M40,40 L50,50" 
+            stroke="#55A0A4" 
+            stroke-width="0.8" 
+            opacity="0.1"/>
+      
+      <!-- Center diamond -->
+      <rect x="23" y="23" 
+            width="4" height="4" 
+            transform="rotate(45, 25, 25)" 
+            fill="#A03A88" 
+            opacity="0.15"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#geometric)"/>
+</svg> 
