@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import AOS from 'aos';
+import * as AOS from 'aos';
 import { CountUpModule } from 'ngx-countup';
 
 @Component({
@@ -14,6 +14,7 @@ import { CountUpModule } from 'ngx-countup';
 export class HomeComponent implements OnInit, OnDestroy {
   currentSlide = 0;
   private slideInterval: any;
+  startCounting = false;
 
   slides = [
     { image: 'assets/slide1.jpg', title: 'Welcome to Our Business', description: 'Professional Signboard Solutions' },
@@ -73,23 +74,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   ];
 
   statistics = [
-    { value: 2000, suffix: '+', label: 'Current Clients', delay: 0 },
-    { value: this.calculateYearsOfExperience(), suffix: '+', label: 'Years Of Experience', delay: 100 },
-    { value: 2, suffix: '+', label: 'Workshops', delay: 200 },
-    { value: 10, suffix: '+', label: 'Recognitions', delay: 300 },
-    { value: 3500, suffix: '+', label: 'Signs Executed', delay: 400 }
+    { value: 1500, suffix: '+', label: 'Current Clients', delay: 0, started: false },
+    { value: this.calculateYearsOfExperience(), suffix: '+', label: 'Years Of Experience', delay: 100, started: false },
+    { value: 2, suffix: '+', label: 'Workshops', delay: 200, started: false },
+    { value: 10, suffix: '+', label: 'Recognitions', delay: 300, started: false },
+    { value: 3500, suffix: '+', label: 'Signs Executed', delay: 400, started: false }
   ];
 
   ngOnInit() {
     AOS.init({
-      duration: 1000,
-      easing: 'ease-in-out',
+      duration: 800,
+      easing: 'ease-out',
       once: true,
-      mirror: false,
-      offset: 50
+      offset: 100,
+      mirror: false
     });
     this.startSlideShow();
     this.initParallaxEffect();
+    this.observeStatistics();
   }
 
   ngOnDestroy() {
@@ -135,5 +137,20 @@ export class HomeComponent implements OnInit, OnDestroy {
     const startYear = 2012;
     const currentYear = new Date().getFullYear();
     return currentYear - startYear;
+  }
+
+  private observeStatistics() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.startCounting = true;
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const statsSection = document.querySelector('.statistics');
+    if (statsSection) {
+      observer.observe(statsSection);
+    }
   }
 } 

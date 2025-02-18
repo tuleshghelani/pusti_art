@@ -1,4 +1,4 @@
-<div class="hero-slider" aos="fade">
+<div class="hero-slider" data-aos="fade-down">
   <div class="slider-container">
     <div class="slide" [ngClass]="{'active': currentSlide === 0}">
       <img src="assets/home/slider1.jpeg" alt="Professional Signage Solutions" loading="lazy">
@@ -30,16 +30,16 @@
   </div>
 </div>
 
-<section class="about-us">
+<section class="about-us" data-aos="fade-up">
   <div class="about-content">
-    <div class="about-text" aos="fade-right">
+    <div class="about-text" data-aos="fade-right" data-aos-delay="200">
       <span class="subtitle">ABOUT US</span>
       <h2 class="title-gradient">Let's Do This</h2>
       <div class="content-wrapper">
         <p class="lead">With over <span class="highlight">3500+ signs executed</span>, we are your trusted partner in creating impactful visual communications. Our journey in signage solutions spans across diverse industries, delivering excellence in every project.</p>
         <p class="description">We take pride in offering comprehensive signage solutions that combine <span class="accent">creativity with precision</span>. From concept to installation, our team ensures your vision is brought to life with the highest quality standards and attention to detail.</p>
       </div>
-      <div class="stats" aos="fade-up" data-aos-delay="200">
+      <div class="stats" data-aos="fade-up" data-aos-delay="200">
         <div class="stat-item">
           <div class="stat-icon">
             <i class="fas fa-award"></i>
@@ -50,19 +50,19 @@
       </div>
     </div>
   </div>
-  <div class="about-images">
-    <div class="image-grid" aos="fade-left">
+  <div class="about-images" data-aos="fade-left" data-aos-delay="400">
+    <div class="image-grid">
       <img src="assets/home/Portfolio7.jpeg" alt="Signage Project" class="main-image">
       <img src="assets/home/Portfolio8.jpeg" alt="Installation Work" class="accent-image">
     </div>
   </div>
 </section>
 
-<section class="statistics" aos="fade-up">
+<section class="statistics" data-aos="fade-up" data-aos-duration="1000">
   <div class="stats-container">
-    <div class="stat-box" *ngFor="let stat of statistics" aos="zoom-in" [attr.data-aos-delay]="stat.delay">
+    <div class="stat-box" *ngFor="let stat of statistics" data-aos="zoom-in" [attr.data-aos-delay]="stat.delay">
       <div class="stat-value">
-        <span [countUp]="stat.value" >0</span>
+        <span [countUp]="stat.value" [options]="{ duration: 2.5, startVal: 0 }" [reanimateOnClick]="false">0</span>
         <span class="suffix">{{stat.suffix}}</span>
       </div>
       <div class="stat-label">{{stat.label}}</div>
@@ -70,51 +70,51 @@
   </div>
 </section>
 
-<div class="landing-container" aos="fade-up">
-    <header class="header">
-      <h1>Welcome to Our Sign Board Business</h1>
-      <p>Your one-stop solution for all signage needs!</p>
-      <button class="cta-button">Get Started</button>
-    </header>
-  
-    <section class="services" aos="fade-up">
-      <h2>Our Services</h2>
-      <div class="service-cards-container">
-        <div class="service-cards">
-          <div class="card" aos="fade-right">
-            <div class="card-content">
-              <h3>Custom Signage</h3>
-              <p>High-quality custom signs tailored to your needs.</p>
-            </div>
+<div class="landing-container">
+  <header class="header" data-aos="fade-down" data-aos-duration="1200">
+    <h1>Welcome to Our Sign Board Business</h1>
+    <p>Your one-stop solution for all signage needs!</p>
+    <button class="cta-button">Get Started</button>
+  </header>
+
+  <section class="services" data-aos="fade-up" data-aos-duration="1000">
+    <h2 data-aos="fade-up">Our Services</h2>
+    <div class="service-cards-container">
+      <div class="service-cards">
+        <div class="card" data-aos="fade-right">
+          <div class="card-content">
+            <h3>Custom Signage</h3>
+            <p>High-quality custom signs tailored to your needs.</p>
           </div>
-          <div class="card" aos="fade-right" data-aos-delay="100">
-            <div class="card-content">
-              <h3>Digital Signage</h3>
-              <p>Modern digital solutions for your business.</p>
-            </div>
+        </div>
+        <div class="card" data-aos="fade-right" data-aos-delay="100">
+          <div class="card-content">
+            <h3>Digital Signage</h3>
+            <p>Modern digital solutions for your business.</p>
           </div>
-          <div class="card" aos="fade-right" data-aos-delay="200">
-            <div class="card-content">
-              <h3>Installation Services</h3>
-              <p>Professional installation for all types of signage.</p>
-            </div>
+        </div>
+        <div class="card" data-aos="fade-right" data-aos-delay="200">
+          <div class="card-content">
+            <h3>Installation Services</h3>
+            <p>Professional installation for all types of signage.</p>
           </div>
         </div>
       </div>
-    </section>
-  
-    <section class="portfolio" aos="fade-up">
-      <h2>Our Portfolio</h2>
-      <div class="portfolio-grid">
-        <div class="portfolio-item" *ngFor="let item of portfolioItems; let i = index" aos="flip-left" [attr.data-aos-delay]="i * 100">
-          <div class="portfolio-image">
-            <img [src]="item.image" [alt]="item.title" loading="lazy" />
-            <div class="portfolio-overlay">
-              <h3>{{item.title}}</h3>
-              <p>{{item.description}}</p>
-            </div>
+    </div>
+  </section>
+
+  <section class="portfolio" data-aos="fade-up" data-aos-duration="1200">
+    <h2 data-aos="fade-up">Our Portfolio</h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-item" *ngFor="let item of portfolioItems; let i = index" data-aos="flip-left" data-aos-delay="i * 100">
+        <div class="portfolio-image">
+          <img [src]="item.image" [alt]="item.title" loading="lazy" />
+          <div class="portfolio-overlay">
+            <h3>{{item.title}}</h3>
+            <p>{{item.description}}</p>
           </div>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+</div>
