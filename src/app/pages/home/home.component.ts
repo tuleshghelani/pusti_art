@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import AOS from 'aos';
@@ -10,7 +10,9 @@ import AOS from 'aos';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  currentSlide = 0;
+  private slideInterval: any;
 
   slides = [
     { image: 'assets/slide1.jpg', title: 'Welcome to Our Business', description: 'Professional Signboard Solutions' },
@@ -35,7 +37,40 @@ export class HomeComponent implements OnInit {
     { image: 'assets/work2.jpg', title: 'Recent Work 2' },
     { image: 'assets/work3.jpg', title: 'Recent Work 3' }
   ];
-  
+
+  portfolioItems = [
+    {
+      image: 'assets/home/Portfolio1.jpeg',
+      title: 'Custom Signage',
+      description: 'Premium business signage solutions'
+    },
+    {
+      image: 'assets/home/Portfolio2.jpeg',
+      title: 'Digital Displays',
+      description: 'Modern digital signage implementations'
+    },
+    {
+      image: 'assets/home/Portfolio3.jpeg',
+      title: 'Installation Projects',
+      description: 'Professional signage installations'
+    },
+    {
+      image: 'assets/home/Portfolio4.jpeg',
+      title: 'Custom Signage',
+      description: 'Premium business signage solutions'
+    },
+    {
+      image: 'assets/home/Portfolio5.jpeg',
+      title: 'Custom Signage',
+      description: 'Premium business signage solutions'
+    },
+    {
+      image: 'assets/home/Portfolio6.jpeg',
+      title: 'Custom Signage',
+      description: 'Premium business signage solutions'
+    },
+  ];
+
   ngOnInit() {
     AOS.init({
       duration: 1000,
@@ -44,5 +79,30 @@ export class HomeComponent implements OnInit {
       mirror: false,
       offset: 50
     });
+    this.startSlideShow();
+  }
+
+  ngOnDestroy() {
+    if (this.slideInterval) {
+      clearInterval(this.slideInterval);
+    }
+  }
+
+  startSlideShow() {
+    this.slideInterval = setInterval(() => {
+      this.nextSlide();
+    }, 5000);
+  }
+
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % 2;
+  }
+
+  prevSlide() {
+    this.currentSlide = this.currentSlide === 0 ? 1 : 0;
+  }
+
+  goToSlide(index: number) {
+    this.currentSlide = index;
   }
 } 
