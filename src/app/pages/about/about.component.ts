@@ -14,10 +14,15 @@ export class AboutComponent implements OnInit {
 
   teamMembers = [
     {
-      name: 'John Doe',
+      name: 'Kartikbhai',
+      role: 'Fonder',
+      image: 'assets/home/Portfolio1.jpeg',
+      state: 'default'
+    },
+    {
+      name: 'Jaypalbhai',
       role: 'CEO',
-      funFact: 'Loves skydiving',
-      image: 'assets/team/john.jpg',
+      image: 'assets/home/Portfolio1.jpeg',
       state: 'default'
     },
     // Add more team members here
@@ -25,10 +30,26 @@ export class AboutComponent implements OnInit {
 
   timelineEvents = [
     {
-      year: '2020',
+      year: '2012',
       title: 'Company Founded',
       description: 'Our journey began...'
     },
+    {
+      year: '2016',
+      title: 'title 2',
+      description: 'Our journey began...'
+    },
+    {
+      year: '2019',
+      title: 'title 3',
+      description: 'Our journey began...'
+    },
+    {
+      year: '2022',
+      title: 'title 4',
+      description: 'Our journey began...'
+    },
+    
     // Add more timeline events
   ];
 
@@ -36,9 +57,18 @@ export class AboutComponent implements OnInit {
     {
       icon: 'assets/icons/innovation.svg',
       title: 'Innovation',
-      description: 'Pushing boundaries with creative solutions'
+      description: 'Pushing boundaries with cutting-edge signage solutions'
     },
-    // Add more features
+    {
+      icon: 'assets/icons/quality.svg',
+      title: 'Quality',
+      description: 'Uncompromising commitment to excellence in every project'
+    },
+    {
+      icon: 'assets/icons/service.svg',
+      title: 'Service',
+      description: 'Dedicated support throughout your signage journey'
+    }
   ];
 
   constructor() { }

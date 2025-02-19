@@ -17,9 +17,9 @@ export class ContactComponent implements OnInit {
   submitStatus: 'success' | 'error' | null = null;
 
   contactInfo = {
-    email: 'hello@company.com',
-    phone: '+1 (555) 123-4567',
-    address: '123 Innovation Street, Tech City, TC 12345'
+    email: 'info@pustiart.com',
+    phone: '+91 1234567890',
+    address: 'Rajkot, Gujarat, India - 360003'
   };
 
   socialLinks = [
