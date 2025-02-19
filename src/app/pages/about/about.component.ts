@@ -15,13 +15,7 @@ export class AboutComponent implements OnInit {
   teamMembers = [
     {
       name: 'Kartikbhai',
-      role: 'Fonder',
-      image: 'assets/home/Portfolio1.jpeg',
-      state: 'default'
-    },
-    {
-      name: 'Jaypalbhai',
-      role: 'CEO',
+      role: 'Founder',
       image: 'assets/home/Portfolio1.jpeg',
       state: 'default'
     },
