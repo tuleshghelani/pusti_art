@@ -25,7 +25,6 @@ export class AboutComponent implements OnInit {
       image: 'assets/home/Portfolio1.jpeg',
       state: 'default'
     },
-    // Add more team members here
   ];
 
   timelineEvents = [
@@ -50,7 +49,6 @@ export class AboutComponent implements OnInit {
       description: 'Our journey began...'
     },
     
-    // Add more timeline events
   ];
 
   features = [

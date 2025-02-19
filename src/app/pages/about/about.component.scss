@@ -82,44 +82,49 @@ $light: #ffffff;
 
 // Hero Section
 .hero {
-  position: relative;
+  padding: 4rem 1rem;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.95);
   
   .hero-content {
-    display: grid;
-    // min-height: 150px;
-    grid-template-columns: 1fr 1fr;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
     align-items: center;
     gap: 2rem;
-    padding: 6rem 0;
-    // background-color: linear-gradient(135deg, $primary-teal, $primary-purple);
-    background-color: #fff;
+
     .hero-text {
-        padding-left: 50px;
+      flex: 1;
+      
       h1 {
-        font-size: 4rem;
+        font-size: clamp(2.5rem, 5vw, 4rem);
         line-height: 1.2;
         margin-bottom: 1.5rem;
-        font-weight: 800;
+        font-family: var(--font-secondary);
         
         .gradient-text {
-          background: $gradient;
+          background: linear-gradient(135deg, var(--primary), var(--secondary));
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
       }
-      
+
       .tagline {
-        font-size: 1.2rem;
-        color: rgba($dark, 0.7);
+        font-size: clamp(1.1rem, 2vw, 1.25rem);
+        color: var(--neutral-medium);
         margin-bottom: 2rem;
+        line-height: 1.6;
       }
     }
-    
+
     .hero-image {
+      flex: 1;
+      
       img {
         width: 100%;
-        animation: float 6s ease-in-out infinite;
+        height: auto;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
       }
     }
   }
@@ -187,6 +192,9 @@ $light: #ffffff;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
   
   .team-card {
     background: $light;
@@ -197,10 +205,19 @@ $light: #ffffff;
     .member-image {
       position: relative;
       overflow: hidden;
+      @media (max-width: 768px) {
+        width: 100%;
+        padding-top: 100%; 
+      }
+      width: 100%;
+      padding-top: 100%; 
       
       img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 300px;
+        height: 100%;
         object-fit: cover;
         transition: transform 0.3s ease;
       }
@@ -213,6 +230,7 @@ $light: #ffffff;
         background: rgba($primary-purple, 0.9);
         padding: 1rem;
         transition: bottom 0.3s ease;
+        text-align: center;
         
         a {
           color: $light;
@@ -446,14 +464,41 @@ $light: #ffffff;
   }
 }
 
-// Responsive Design
+// Mobile Responsiveness
 @media (max-width: 768px) {
-  .hero .hero-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-    
-    h1 {
-      font-size: 3rem;
+  .hero {
+    padding: 2rem 1rem;
+
+    .hero-content {
+      flex-direction: column;
+      text-align: center;
+      
+      .hero-text {
+        order: 1;
+        
+        h1 {
+          font-size: 2.5rem;
+        }
+        
+        .tagline {
+          font-size: 1.1rem;
+        }
+        
+        .cta-button {
+          margin: 0 auto;
+        }
+      }
+      
+      .hero-image {
+        order: 2;
+        margin-top: 2rem;
+        max-width: 100%;
+        
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
     }
   }
   
@@ -471,5 +516,24 @@ $light: #ffffff;
         text-align: left !important;
       }
     }
+  }
+  
+  .team-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    
+    .team-card {
+      .member-image {
+        padding-top: 75%; // Makes it slightly rectangular on mobile
+      }
+    }
+  }
+}
+
+// Ensure CTA button is centered on mobile
+.cta-button {
+  @media (max-width: 768px) {
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
   }
 }
