@@ -15,13 +15,7 @@ export class ContactComponent implements OnInit {
   contactForm: FormGroup;
   submitted = false;
   submitStatus: 'success' | 'error' | null = null;
-
-  contactInfo = {
-    email: 'info@pustiart.com',
-    phone: '+91 1234567890',
-    address: 'Rajkot, Gujarat, India - 360003'
-  };
-
+  
   socialLinks = [
     { name: 'LinkedIn', icon: 'fab fa-linkedin', url: '#' },
     { name: 'Twitter', icon: 'fab fa-twitter', url: '#' },
