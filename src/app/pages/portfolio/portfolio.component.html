@@ -1,136 +1,111 @@
-<div class="portfolio-container" [ngClass]="{'dark-theme': isDarkTheme}">
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="animate-fade-in">Crafting Brilliant Signage</h1>
-            <p class="subtitle animate-fade-in">Transforming spaces with innovative LED & digital signage solutions</p>
-            <button class="cta-button animate-fade-in" (click)="scrollToProjects()">
-                View Our Work
-                <i class="fas fa-arrow-right"></i>
-            </button>
-        </div>
-        <div class="theme-toggle">
-            <button (click)="toggleTheme()" [attr.aria-label]="isDarkTheme ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
-                <i class="fas" [ngClass]="isDarkTheme ? 'fa-sun' : 'fa-moon'"></i>
-            </button>
-        </div>
-    </section>
+<!-- Hero Section -->
+<section class="portfolio-hero" data-aos="fade-down">
+  <div class="hero-content">
+    <span class="subtitle" data-aos="fade-up" data-aos-delay="200">OUR WORK</span>
+    <h1 data-aos="fade-up" data-aos-delay="300">Transforming Spaces<br>With <span class="gradient-text">Innovative Signage</span></h1>
+    <p data-aos="fade-up" data-aos-delay="400">Discover our collection of custom signage solutions that bring brands to life</p>
+  </div>
+  
+  <!-- Stats Section -->
+  <div class="stats-container" data-aos="fade-up" data-aos-delay="500">
+    <div class="stats-grid">
+      <div class="stat-item" *ngFor="let stat of stats">
+        <span class="number">{{stat.number}}</span>
+        <span class="label">{{stat.label}}</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <div class="section-header">
-            <h2>Featured Projects</h2>
-            <div class="filter-container">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" [(ngModel)]="searchTerm" placeholder="Search projects...">
-                </div>
-                <div class="category-filters">
-                    <button [ngClass]="{'active': selectedCategory === 'all'}" 
-                            (click)="filterByCategory('all')">All</button>
-                    <button [ngClass]="{'active': selectedCategory === 'led'}" 
-                            (click)="filterByCategory('led')">LED Signs</button>
-                    <button [ngClass]="{'active': selectedCategory === 'neon'}" 
-                            (click)="filterByCategory('neon')">Neon</button>
-                    <button [ngClass]="{'active': selectedCategory === 'digital'}" 
-                            (click)="filterByCategory('digital')">Digital</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-grid">
-            <div class="project-card" *ngFor="let project of filteredProjects()" 
-                 [ngClass]="{'animate-card': true}"
-                 (mouseenter)="project.showDetails = true"
-                 (mouseleave)="project.showDetails = false">
-                <div class="card-image">
-                    <img [src]="project.image" [alt]="project.title" loading="lazy">
-                    <div class="card-overlay" [ngClass]="{'show': project.showDetails}">
-                        <div class="overlay-content">
-                            <h3>{{ project.title }}</h3>
-                            <p>{{ project.description }}</p>
-                            <div class="tech-stack">
-                                <span *ngFor="let tech of project.technologies">{{ tech }}</span>
-                            </div>
-                            <button class="view-project" [routerLink]="['/project', project.id]">
-                                View Project
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <h2>Client Success Stories</h2>
-        <div class="testimonial-slider">
-            <div class="testimonial-track" [style.transform]="'translateX(' + testimonialPosition + '%)'">
-                <div class="testimonial-card" *ngFor="let testimonial of testimonials">
-                    <div class="testimonial-content">
-                        <i class="fas fa-quote-left"></i>
-                        <p>{{ testimonial.feedback }}</p>
-                        <div class="client-info">
-                            <img [src]="testimonial.avatar" [alt]="testimonial.client">
-                            <div>
-                                <h4>{{ testimonial.client }}</h4>
-                                <span>{{ testimonial.company }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-controls">
-                <button (click)="previousTestimonial()"><i class="fas fa-chevron-left"></i></button>
-                <button (click)="nextTestimonial()"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact">
-        <div class="contact-container">
-            <div class="contact-info">
-                <h2>Let's Create Something Amazing</h2>
-                <p>Ready to transform your space with stunning signage? Get in touch with us today.</p>
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 123-4567</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>pustiart89&#64;gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>123 Creative Street, Design City</span>
-                    </div>
-                </div>
-            </div>
-            <form class="contact-form" (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
-                <div class="form-group">
-                    <input type="text" name="name" ngModel required placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" ngModel required placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                    <textarea name="message" ngModel required placeholder="Tell us about your project"></textarea>
-                </div>
-                <button type="submit" [disabled]="!contactForm.valid">
-                    Send Message
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Floating CTA -->
-    <button class="floating-cta" (click)="requestQuote()">
-        Get a Quote
-        <i class="fas fa-arrow-right"></i>
+<!-- Category Filter -->
+<section class="category-filter" data-aos="fade-up">
+  <h2>Browse Our Projects</h2>
+  <p class="section-description">Filter through our diverse portfolio of signage solutions</p>
+  <div class="filter-buttons">
+    <button 
+      *ngFor="let cat of categories"
+      [class.active]="selectedCategory === cat.id"
+      (click)="filterProjects(cat.id)"
+      class="filter-btn">
+      {{cat.name}}
     </button>
+  </div>
+</section>
+
+<!-- Portfolio Grid -->
+<section class="portfolio-grid">
+  <div class="grid-container">
+    <div 
+      *ngFor="let project of getFilteredProjects()"
+      class="portfolio-item"
+      [attr.data-category]="project.category"
+      data-aos="fade-up">
+      <div class="project-card" (click)="openProjectModal(project)">
+        <div class="project-image">
+          <img [src]="project.image" [alt]="project.title">
+          <div class="overlay">
+            <div class="overlay-content">
+              <span class="category-tag">{{project.category | titlecase}}</span>
+              <h3>{{project.title}}</h3>
+              <p>{{project.client}}</p>
+              <button class="view-btn">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Project Modal -->
+<div class="project-modal" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModal()">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="modal-body" *ngIf="selectedProject">
+      <div class="project-image">
+        <img [src]="selectedProject.image" [alt]="selectedProject.title">
+      </div>
+      <div class="project-details">
+        <span class="project-category">{{selectedProject.category | titlecase}}</span>
+        <h2>{{selectedProject.title}}</h2>
+        <p class="client">
+          <i class="fas fa-building"></i>
+          {{selectedProject.client}}
+        </p>
+        <p class="description">{{selectedProject.description}}</p>
+        
+        <div class="project-highlights">
+          <h4>Project Highlights</h4>
+          <ul>
+            <li *ngFor="let highlight of selectedProject.highlights">
+              <i class="fas fa-check-circle"></i>
+              {{highlight}}
+            </li>
+          </ul>
+        </div>
+
+        <div class="project-meta">
+          <div class="meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>{{selectedProject.location}}</span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span>{{selectedProject.year}}</span>
+          </div>
+        </div>
+
+        <div class="materials">
+          <h4>Materials Used</h4>
+          <div class="material-tags">
+            <span class="material-tag" *ngFor="let material of selectedProject.materials">
+              {{material}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

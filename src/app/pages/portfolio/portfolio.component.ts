@@ -1,137 +1,100 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
-interface ProcessStep {
-  title: string;
-  description: string;
-}
-
-interface Technology {
-  name: string;
-  description: string;
-  icon: string;
-}
-
-interface Statistic {
-  value: number;
-  label: string;
-}
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [FormsModule,RouterModule,CommonModule],
+  imports: [FormsModule, RouterModule, CommonModule],
   templateUrl: './portfolio.component.html',
   styleUrl: './portfolio.component.scss'
 })
 export class PortfolioComponent implements OnInit {
-    isDarkTheme = false;
-    searchTerm = '';
-    selectedCategory = 'all';
-    testimonialPosition = 0;
+  selectedCategory: string = 'all';
+  showModal: boolean = false;
+  selectedProject: any = null;
 
-    projects = [
-        {
-            id: 1,
-            title: 'Downtown Plaza LED Display',
-            description: 'Massive LED billboard installation for city center',
-            category: 'led',
-            technologies: ['LED Matrix', 'Smart Control', 'Weather-Proof'],
-            image: 'assets/images/project1.jpg',
-            showDetails: false
-        },
-        // Add more projects...
-    ];
+  categories = [
+    { id: 'all', name: 'All Projects' },
+    { id: 'led', name: 'LED Sign Boards' },
+    { id: 'acrylic', name: 'Acrylic Signs' },
+    { id: 'neon', name: 'Neon Signs' },
+    { id: 'metal', name: 'Metal Letters' },
+    { id: 'digital', name: 'Digital Signages' }
+  ];
 
-    testimonials = [
-        {
-            client: 'Sarah Johnson',
-            company: 'Metro Mall',
-            feedback: 'The LED installation transformed our shopping center. Footfall increased by 40% since installation.',
-            avatar: 'assets/images/testimonial1.jpg'
-        },
-        // Add more testimonials...
-    ];
+  stats = [
+    { number: '500+', label: 'Projects Completed' },
+    { number: '50+', label: 'Cities Covered' },
+    { number: '300+', label: 'Happy Clients' },
+    { number: '15+', label: 'Years Experience' }
+  ];
 
-    statistics: Statistic[] = [
-        { value: 500, label: 'Projects Completed' },
-        { value: 150, label: 'Happy Clients' },
-        { value: 50, label: 'Cities Covered' },
-        { value: 15, label: 'Years Experience' }
-    ];
+  portfolioItems = [
+    {
+      id: 1,
+      title: 'Modern LED Signage',
+      category: 'led',
+      image: 'assets/portfolio/led1.jpg',
+      client: 'Tech Solutions Inc.',
+      description: 'Custom LED signage with dynamic lighting effects and programmable displays. Features energy-efficient modules with remote control capabilities.',
+      materials: ['LED Modules', 'Aluminum Composite', 'Acrylic'],
+      location: 'Downtown Business District',
+      year: '2023',
+      highlights: [
+        'Energy-efficient LED modules',
+        'Remote-controlled display',
+        'Weather-resistant design',
+        'Custom animation sequences'
+      ]
+    },
+    {
+      id: 2,
+      title: 'Luxury Retail Signage',
+      category: 'acrylic',
+      image: 'assets/portfolio/acrylic1.jpg',
+      client: 'Fashion Boutique',
+      description: 'Premium acrylic signage with gold-plated lettering and backlit elements, creating an elegant and sophisticated brand presence.',
+      materials: ['Premium Acrylic', 'Gold Plating', 'LED Backlighting'],
+      location: 'High-end Shopping Mall',
+      year: '2023',
+      highlights: [
+        'Gold-plated finish',
+        'Crystal-clear acrylic',
+        'Ambient backlighting',
+        'Premium mounting system'
+      ]
+    },
+    // Add more portfolio items here
+  ];
 
-    processSteps: ProcessStep[] = [
-        {
-            title: 'Consultation',
-            description: 'Understanding your vision and requirements'
-        },
-        // Add more steps...
-    ];
+  ngOnInit() {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out',
+      once: true
+    });
+  }
 
-    technologies: Technology[] = [
-        {
-            name: 'LED Matrix',
-            description: 'High-brightness LED display technology',
-            icon: 'assets/icons/led-matrix.svg'
-        },
-        // Add more technologies...
-    ];
+  filterProjects(category: string) {
+    this.selectedCategory = category;
+  }
 
-    ngOnInit() {
-        this.checkPreferredTheme();
-    }
+  getFilteredProjects() {
+    return this.selectedCategory === 'all' 
+      ? this.portfolioItems 
+      : this.portfolioItems.filter(item => item.category === this.selectedCategory);
+  }
 
-    checkPreferredTheme() {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            this.isDarkTheme = true;
-        }
-    }
+  openProjectModal(project: any) {
+    this.selectedProject = project;
+    this.showModal = true;
+  }
 
-    toggleTheme() {
-        this.isDarkTheme = !this.isDarkTheme;
-    }
-
-    scrollToProjects() {
-        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    filterByCategory(category: string) {
-        this.selectedCategory = category;
-    }
-
-    filteredProjects() {
-        return this.projects.filter(project => {
-            const matchesSearch = project.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-                                project.description.toLowerCase().includes(this.searchTerm.toLowerCase());
-            const matchesCategory = this.selectedCategory === 'all' || project.category === this.selectedCategory;
-            return matchesSearch && matchesCategory;
-        });
-    }
-
-    nextTestimonial() {
-        this.testimonialPosition -= 100;
-        if (this.testimonialPosition < -(this.testimonials.length - 1) * 100) {
-            this.testimonialPosition = 0;
-        }
-    }
-
-    previousTestimonial() {
-        this.testimonialPosition += 100;
-        if (this.testimonialPosition > 0) {
-            this.testimonialPosition = -(this.testimonials.length - 1) * 100;
-        }
-    }
-
-    onSubmit(form: any) {
-        if (form.valid) {
-            console.log('Form submitted:', form.value);
-            // Add your form submission logic here
-        }
-    }
-
-    requestQuote() {
-        // Add your quote request logic here
-    }
+  closeModal() {
+    this.showModal = false;
+    this.selectedProject = null;
+  }
 }
