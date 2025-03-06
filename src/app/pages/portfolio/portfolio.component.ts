@@ -37,7 +37,7 @@ export class PortfolioComponent implements OnInit {
       id: 1,
       title: 'Modern LED Signage',
       category: 'led',
-      image: 'assets/portfolio/led1.jpg',
+      image: 'assets/home/Portfolio1.jpeg',
       client: 'Tech Solutions Inc.',
       description: 'Custom LED signage with dynamic lighting effects and programmable displays. Features energy-efficient modules with remote control capabilities.',
       materials: ['LED Modules', 'Aluminum Composite', 'Acrylic'],
@@ -54,7 +54,7 @@ export class PortfolioComponent implements OnInit {
       id: 2,
       title: 'Luxury Retail Signage',
       category: 'acrylic',
-      image: 'assets/portfolio/acrylic1.jpg',
+      image: 'assets/home/Portfolio2.jpeg',
       client: 'Fashion Boutique',
       description: 'Premium acrylic signage with gold-plated lettering and backlit elements, creating an elegant and sophisticated brand presence.',
       materials: ['Premium Acrylic', 'Gold Plating', 'LED Backlighting'],
@@ -67,7 +67,74 @@ export class PortfolioComponent implements OnInit {
         'Premium mounting system'
       ]
     },
-    // Add more portfolio items here
+    {
+      id: 3,
+      title: 'Luxury Retail Signage',
+      category: 'acrylic',
+      image: 'assets/home/Portfolio3.jpeg',
+      client: 'Fashion Boutique',
+      description: 'Premium acrylic signage with gold-plated lettering and backlit elements, creating an elegant and sophisticated brand presence.',
+      materials: ['Premium Acrylic', 'Gold Plating', 'LED Backlighting'],
+      location: 'High-end Shopping Mall',
+      year: '2023',
+      highlights: [
+        'Gold-plated finish',
+        'Crystal-clear acrylic',
+        'Ambient backlighting',
+        'Premium mounting system'
+      ]
+    },
+    {
+      id: 4,
+      title: 'Luxury Retail Signage',
+      category: 'acrylic',
+      image: 'assets/home/Portfolio4.jpeg',
+      client: 'Fashion Boutique',
+      description: 'Premium acrylic signage with gold-plated lettering and backlit elements, creating an elegant and sophisticated brand presence.',
+      materials: ['Premium Acrylic', 'Gold Plating', 'LED Backlighting'],
+      location: 'High-end Shopping Mall',
+      year: '2023',
+      highlights: [
+        'Gold-plated finish',
+        'Crystal-clear acrylic',
+        'Ambient backlighting',
+        'Premium mounting system'
+      ]
+    },
+    {
+      id: 5,
+      title: 'Luxury Retail Signage',
+      category: 'acrylic',
+      image: 'assets/home/Portfolio5.jpeg',
+      client: 'Fashion Boutique',
+      description: 'Premium acrylic signage with gold-plated lettering and backlit elements, creating an elegant and sophisticated brand presence.',
+      materials: ['Premium Acrylic', 'Gold Plating', 'LED Backlighting'],
+      location: 'High-end Shopping Mall',
+      year: '2023',
+      highlights: [
+        'Gold-plated finish',
+        'Crystal-clear acrylic',
+        'Ambient backlighting',
+        'Premium mounting system'
+      ]
+    },
+    {
+      id: 6,
+      title: 'Luxury Retail Signage',
+      category: 'acrylic',
+      image: 'assets/home/Portfolio6.jpeg',
+      client: 'Fashion Boutique',
+      description: 'Premium acrylic signage with gold-plated lettering and backlit elements, creating an elegant and sophisticated brand presence.',
+      materials: ['Premium Acrylic', 'Gold Plating', 'LED Backlighting'],
+      location: 'High-end Shopping Mall',
+      year: '2023',
+      highlights: [
+        'Gold-plated finish',
+        'Crystal-clear acrylic',
+        'Ambient backlighting',
+        'Premium mounting system'
+      ]
+    },
   ];
 
   ngOnInit() {

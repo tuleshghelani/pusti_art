@@ -26,18 +26,23 @@ h1, h2, h3, h4, h5, h6 {
 :root {
   // Primary Colors - Professional Teal
   --primary: #55A0A4;
+  --primary2: #4CA1AF;
+  --primary-dark: #2C3E50;
   --primary-light: #7BB8BB;
   --primary-lighter: #A1CFD1;
   --primary-lightest: #E5F2F2;
 
   // Secondary Colors - Elegant Purple
   --secondary: #A03A88;
+  --secondary2: #606C88;
   --secondary-light: #BC62A7;
   --secondary-lighter: #D68AC6;
+  --secondary-lighter2: #8EC5FC;
   --secondary-lightest: #F7E6F2;
 
   // Accent Colors - Professional & Modern
   --accent: #FFB649;        // Warm Orange for CTAs
+  --accent2: #FFB75E;
   --accent-light: #FFC674;
   --accent-lighter: #FFD69E;
   --accent-lightest: #FFF4E4;
@@ -47,6 +52,11 @@ h1, h2, h3, h4, h5, h6 {
   --neutral-medium: #607D8B; // Professional Gray
   --neutral-light: #B0BEC5;  // Subtle Gray
   --neutral-lightest: #ECEFF1; // Background Gray
+
+  --neutral-dark2: #2D3748;   // Deep Blue-Gray for text
+  --neutral-medium2: #718096; // Professional Gray
+  --neutral-light2: #E2E8F0;  // Subtle Gray
+  --neutral-lightest2: #F7FAFC; // Background Gray
 
   // Success/Error Colors
   --success: #2ECC71;
