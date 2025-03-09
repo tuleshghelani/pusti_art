@@ -164,4 +164,14 @@ export class PortfolioComponent implements OnInit {
     this.showModal = false;
     this.selectedProject = null;
   }
+
+  getCategoryColor(category: string): string {
+    const colors:any = {
+      'residential': 'var(--primary)',
+      'commercial': 'var(--secondary)',
+      'industrial': 'var(--accent)',
+      // Add more categories as needed
+    };
+    return colors[category.toLowerCase()] || 'var(--primary)';
+  }
 }

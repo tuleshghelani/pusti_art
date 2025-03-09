@@ -60,50 +60,87 @@
 <!-- Project Modal -->
 <div class="project-modal" *ngIf="showModal" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- Close button with improved styling -->
     <button class="close-btn" (click)="closeModal()">
       <i class="fas fa-times"></i>
     </button>
+
     <div class="modal-body" *ngIf="selectedProject">
-      <div class="project-image">
-        <img [src]="selectedProject.image" [alt]="selectedProject.title">
+      <!-- Image Gallery Section -->
+      <div class="project-gallery">
+        <div class="main-image pt-3 ps-3">
+          <img [src]="selectedProject.image" [alt]="selectedProject.title">
+        </div>
+        <div class="thumbnail-grid" *ngIf="selectedProject.additionalImages">
+          <div class="thumbnail" *ngFor="let img of selectedProject.additionalImages">
+            <img [src]="img" [alt]="selectedProject.title">
+          </div>
+        </div>
       </div>
+
+      <!-- Project Details Section -->
       <div class="project-details">
-        <span class="project-category">{{selectedProject.category | titlecase}}</span>
-        <h2>{{selectedProject.title}}</h2>
-        <p class="client">
-          <i class="fas fa-building"></i>
-          {{selectedProject.client}}
-        </p>
-        <p class="description">{{selectedProject.description}}</p>
-        
+        <div class="header-section">
+          <span class="project-category" [style.background]="getCategoryColor(selectedProject.category)">
+            {{selectedProject.category | titlecase}}
+          </span>
+          <h2>{{selectedProject.title}}</h2>
+          <div class="client-info">
+            <i class="fas fa-building"></i>
+            <span>{{selectedProject.client}}</span>
+          </div>
+        </div>
+
+        <div class="description-section">
+          <p class="description">{{selectedProject.description}}</p>
+        </div>
+
+        <!-- Project Metadata -->
+        <div class="project-meta">
+          <div class="meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="meta-content">
+              <span class="label">Location</span>
+              <span class="value">{{selectedProject.location}}</span>
+            </div>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            <div class="meta-content">
+              <span class="label">Completed</span>
+              <span class="value">{{selectedProject.year}}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Highlights -->
         <div class="project-highlights">
-          <h4>Project Highlights</h4>
+          <h4><i class="fas fa-star"></i> Project Highlights</h4>
           <ul>
             <li *ngFor="let highlight of selectedProject.highlights">
               <i class="fas fa-check-circle"></i>
-              {{highlight}}
+              <span>{{highlight}}</span>
             </li>
           </ul>
         </div>
 
-        <div class="project-meta">
-          <div class="meta-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>{{selectedProject.location}}</span>
-          </div>
-          <div class="meta-item">
-            <i class="fas fa-calendar-alt"></i>
-            <span>{{selectedProject.year}}</span>
-          </div>
-        </div>
-
+        <!-- Materials Used -->
         <div class="materials">
-          <h4>Materials Used</h4>
+          <h4><i class="fas fa-tools"></i> Materials Used</h4>
           <div class="material-tags">
             <span class="material-tag" *ngFor="let material of selectedProject.materials">
+              <i class="fas fa-circle"></i>
               {{material}}
             </span>
           </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="project-cta">
+          <button class="enquire-btn">
+            <i class="fas fa-envelope"></i>
+            Enquire About Similar Project
+          </button>
         </div>
       </div>
     </div>
