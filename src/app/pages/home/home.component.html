@@ -1,29 +1,80 @@
 <div class="hero-slider" data-aos="fade-down">
-  <div class="slider-container">
+  <div class="slider-container" 
+       (touchstart)="onTouchStart($event)" 
+       (touchmove)="onTouchMove($event)" 
+       (touchend)="onTouchEnd($event)">
     <div class="slide" [ngClass]="{'active': currentSlide === 0}">
-      <img src="assets/home/slider1.jpeg" alt="Professional Signage Solutions" loading="lazy">
+      <img src="assets/slider/1.jpg" alt="Premium Signage Solutions" loading="lazy">
       <div class="slide-content">
-        <h2>Professional Signage Solutions</h2>
-        <p>Creating impactful visual communications for your business</p>
+        <!-- <h2>Premium Signage Solutions</h2>
+        <p>Creating impactful visual communications for your business</p> -->
       </div>
     </div>
     <div class="slide" [ngClass]="{'active': currentSlide === 1}">
-      <img src="assets/home/slider2.jpeg" alt="Custom Sign Manufacturing" loading="lazy">
+      <img src="assets/slider/2.jpg" alt="Custom Sign Manufacturing" loading="lazy">
       <div class="slide-content">
-        <h2>Custom Sign Manufacturing</h2>
-        <p>Bringing your vision to life with precision and quality</p>
+        <!-- <h2>Custom Sign Manufacturing</h2>
+        <p>Bringing your vision to life with precision and quality</p> -->
+      </div>
+    </div>
+    <div class="slide" [ngClass]="{'active': currentSlide === 2}">
+      <img src="assets/slider/3.jpg" alt="Artistic Expression" loading="lazy">
+      <div class="slide-content">
+        <!-- <h2>Artistic Expression</h2>
+        <p>Elevate your words with artistic expression</p> -->
+      </div>
+    </div>
+    <div class="slide" [ngClass]="{'active': currentSlide === 3}">
+      <img src="assets/slider/4.jpg" alt="Iconic Signage" loading="lazy">
+      <div class="slide-content">
+        <!-- <h2>Iconic Signage</h2>
+        <p>Where names become iconic</p> -->
       </div>
     </div>
     
     <div class="slider-controls">
-      <button class="prev-btn" (click)="prevSlide()">
+      <button class="prev-btn" 
+              type="button"
+              (click)="prevSlide()"
+              (touchstart)="preventEvent($event)"
+              aria-label="Previous slide">
         <i class="fas fa-chevron-left"></i>
       </button>
       <div class="slider-dots">
-        <span class="dot" [ngClass]="{'active': currentSlide === 0}" (click)="goToSlide(0)"></span>
-        <span class="dot" [ngClass]="{'active': currentSlide === 1}" (click)="goToSlide(1)"></span>
+        <span class="dot" 
+              [ngClass]="{'active': currentSlide === 0}" 
+              (click)="goToSlide(0)"
+              (touchstart)="preventEvent($event)"
+              role="button"
+              tabindex="0"
+              [attr.aria-label]="'Go to slide ' + (0 + 1)"></span>
+        <span class="dot" 
+              [ngClass]="{'active': currentSlide === 1}" 
+              (click)="goToSlide(1)"
+              (touchstart)="preventEvent($event)"
+              role="button"
+              tabindex="0"
+              [attr.aria-label]="'Go to slide ' + (1 + 1)"></span>
+        <span class="dot" 
+              [ngClass]="{'active': currentSlide === 2}" 
+              (click)="goToSlide(2)"
+              (touchstart)="preventEvent($event)"
+              role="button"
+              tabindex="0"
+              [attr.aria-label]="'Go to slide ' + (2 + 1)"></span>
+        <span class="dot" 
+              [ngClass]="{'active': currentSlide === 3}" 
+              (click)="goToSlide(3)"
+              (touchstart)="preventEvent($event)"
+              role="button"
+              tabindex="0"
+              [attr.aria-label]="'Go to slide ' + (3 + 1)"></span>
       </div>
-      <button class="next-btn" (click)="nextSlide()">
+      <button class="next-btn" 
+              type="button"
+              (click)="nextSlide()"
+              (touchstart)="preventEvent($event)"
+              aria-label="Next slide">
         <i class="fas fa-chevron-right"></i>
       </button>
     </div>

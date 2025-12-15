@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import * as AOS from 'aos';
 import { CountUpModule } from 'ngx-countup';
 
 @Component({
@@ -15,6 +14,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   currentSlide = 0;
   private slideInterval: any;
   startCounting = false;
+  private touchStartX = 0;
+  private touchEndX = 0;
+  private readonly SWIPE_THRESHOLD = 50;
+  private readonly TOTAL_SLIDES = 4;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   slides = [
     { image: 'assets/slide1.jpg', title: 'Welcome to Our Business', description: 'Professional Signboard Solutions' },
@@ -82,16 +87,27 @@ export class HomeComponent implements OnInit, OnDestroy {
   ];
 
   ngOnInit() {
-    AOS.init({
-      duration: 800,
-      easing: 'ease-out',
-      once: true,
-      offset: 100,
-      mirror: false
-    });
-    this.startSlideShow();
-    this.initParallaxEffect();
-    this.observeStatistics();
+    if (isPlatformBrowser(this.platformId)) {
+      // Initialize AOS only in browser - use dynamic import to avoid SSR issues
+      import('aos').then((AOSModule) => {
+        const AOS = AOSModule.default || AOSModule;
+        if (AOS && typeof AOS.init === 'function') {
+          AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: true,
+            offset: 100,
+            mirror: false
+          });
+        }
+      }).catch((error) => {
+        console.warn('AOS initialization failed:', error);
+      });
+      
+      this.startSlideShow();
+      this.initParallaxEffect();
+      this.observeStatistics();
+    }
   }
 
   ngOnDestroy() {
@@ -107,18 +123,69 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   nextSlide() {
-    this.currentSlide = (this.currentSlide + 1) % 2;
+    this.currentSlide = (this.currentSlide + 1) % this.TOTAL_SLIDES;
+    this.resetSlideInterval();
   }
 
   prevSlide() {
-    this.currentSlide = this.currentSlide === 0 ? 1 : 0;
+    this.currentSlide = this.currentSlide === 0 ? this.TOTAL_SLIDES - 1 : this.currentSlide - 1;
+    this.resetSlideInterval();
   }
 
   goToSlide(index: number) {
-    this.currentSlide = index;
+    if (index >= 0 && index < this.TOTAL_SLIDES) {
+      this.currentSlide = index;
+      this.resetSlideInterval();
+    }
+  }
+
+  private resetSlideInterval() {
+    if (this.slideInterval) {
+      clearInterval(this.slideInterval);
+    }
+    this.startSlideShow();
+  }
+
+  // Touch event handlers for mobile swipe support
+  onTouchStart(event: TouchEvent): void {
+    this.touchStartX = event.changedTouches[0].screenX;
+  }
+
+  onTouchMove(event: TouchEvent): void {
+    // Prevent default to avoid scrolling while swiping
+    event.preventDefault();
+  }
+
+  onTouchEnd(event: TouchEvent): void {
+    this.touchEndX = event.changedTouches[0].screenX;
+    this.handleSwipe();
+  }
+
+  private handleSwipe(): void {
+    const swipeDistance = this.touchStartX - this.touchEndX;
+    
+    if (Math.abs(swipeDistance) > this.SWIPE_THRESHOLD) {
+      if (swipeDistance > 0) {
+        // Swipe left - next slide
+        this.nextSlide();
+      } else {
+        // Swipe right - previous slide
+        this.prevSlide();
+      }
+    }
+  }
+
+  // Prevent event propagation for touch events on interactive elements
+  preventEvent(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
   }
 
   private initParallaxEffect() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    
     window.addEventListener('scroll', () => {
       const images = document.querySelectorAll('.parallax-img');
       images.forEach((img: Element) => {
@@ -140,6 +207,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private observeStatistics() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
