@@ -1,7 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, Inject, PLATFORM_ID, afterNextRender } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import * as AOS from 'aos';
 
 @Component({
   selector: 'app-contact',
@@ -23,21 +22,47 @@ export class ContactComponent implements OnInit {
     { name: 'Facebook', icon: 'fab fa-facebook', url: '#' }
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       subject: ['', Validators.required],
       message: ['', Validators.required]
     });
+
+    // Use afterNextRender to ensure AOS only initializes in browser after render
+    afterNextRender(() => {
+      if (isPlatformBrowser(this.platformId) && typeof window !== 'undefined') {
+        setTimeout(() => {
+          this.initializeAOS();
+        }, 0);
+      }
+    });
   }
 
   ngOnInit(): void {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100
-    });
+    // Component initialization
+  }
+
+  private initializeAOS(): void {
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const importAOS = () => import('aos');
+      importAOS().then((AOSModule) => {
+        const AOS = AOSModule.default || AOSModule;
+        if (AOS && typeof AOS.init === 'function') {
+          AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+          });
+        }
+      }).catch(() => {
+        // Silently fail - AOS is not critical for functionality
+      });
+    }
   }
 
   onSubmit() {
